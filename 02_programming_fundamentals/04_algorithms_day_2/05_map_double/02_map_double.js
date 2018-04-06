@@ -9,8 +9,14 @@
 // Finally, test map with an array of your choice and the double function.
 //
 // WARNING: You're not allowed to use `Array.map`!
+function double(maValeur) {
+  return maValeur * 2;
+}
 
 // Your code here...
+function map(array, func) {
+  return array.map(func);
+}
 
 // Do not remove last lines, it is for tests
 // eslint-disable-next-line
