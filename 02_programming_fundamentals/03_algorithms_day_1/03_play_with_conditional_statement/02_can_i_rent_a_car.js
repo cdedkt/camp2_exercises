@@ -15,5 +15,11 @@ const bonus = driverData.bonus;
 //   `true` if the driver can rent a car
 //   `false` if not
 let canRentACar;
-
+/*
+driverLicense: 'B1',
+licenceIssued: 2001,
+numberOfAccident: 0,
+bonus: 0.8,
+*/
 // Your code here:
+canRentACar = (driverLicense === "B" && (numberOfAccident>0 && bonus>0.6));
