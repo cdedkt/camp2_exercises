@@ -8,9 +8,38 @@
    - otherwise, the value is preserved.
 */
 
-function fizzBuzz(list) {
-
+function range(n1, n2) {
+  let res = [];
+  if (n1<n2) {
+    for(let i=n1; i<=n2; i++){
+      res.push(i);
+    }
+  } else {
+    for(let i=n1; i>=n2; i--){
+      res.push(i);
+    }
+  }
+  return res;
 }
 
+function transformUneValeur(uneValeur) {
+  if (uneValeur % 15 === 0) {
+    return "FizzBuzz";
+  } else if (uneValeur % 3 === 0) {
+    return "Fizz";
+  } else if (uneValeur % 5 === 0) {
+    return "Buzz";
+  } else {
+    return uneValeur;
+  }
+}
+
+function fizzBuzz(list) {
+  return list.map(transformUneValeur);
+}
+
+let maList = range(1,15);
+console.log(maList);
+console.log(fizzBuzz(maList));
 
 module.exports = fizzBuzz;
