@@ -8,7 +8,9 @@ const driver = {
 // Write a function canRentACar:
 // * Input: a driver
 // * Output: a boolean if the driver can rent a car
-
+function canRentACar(aDriver) {
+  return (aDriver.driverLicense === "B" && (aDriver.licenseIssued <= new Date().getFullYear() - 2) && ((aDriver.numberOfAccident===0) || (aDriver.numberOfAccident>0 && aDriver.bonus>=0.7)));
+}
 
 
 
