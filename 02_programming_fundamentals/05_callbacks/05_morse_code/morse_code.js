@@ -1,4 +1,5 @@
-// Your task is to implement a function decodeMorse(morseCode), that would take the morse code as input and return a decoded human-readable string.
+// Your task is to implement a function decodeMorse(morseCode), that would take the morse code as input
+// and return a decoded human-readable string.
 //
 // For example:
 //
@@ -44,8 +45,18 @@ const MORSE_CODE = {
   "----.": "9"
 };
 
+function decodeSymbol(symbol) {
+  if (symbol === "SP") {
+    return " ";
+  } else {
+    return MORSE_CODE[symbol];}
+}
+
 function decodeMorse(morse) {
-  // Your code here
+  let listSymbol = morse.replace(new RegExp(" {3}", "g"), " SP ");
+  listSymbol = listSymbol.split(" ");
+  const listCaractere = listSymbol.map(decodeSymbol);
+  return listCaractere.join("");
 }
 
 // Do not remove last lines, it is for tests
