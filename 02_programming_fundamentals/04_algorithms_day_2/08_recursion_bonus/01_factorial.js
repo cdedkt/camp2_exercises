@@ -8,7 +8,13 @@
 
 
 function fact(n) {
-  // your code here
+  if (typeof n === "string") return null;
+  if (n<0) return null;
+  if (n > 1) {
+    return n * fact(n-1);
+  } else {
+    return 1;
+  }
 }
 
 
