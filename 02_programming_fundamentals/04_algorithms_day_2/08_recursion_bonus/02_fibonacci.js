@@ -2,7 +2,8 @@
 // following integer sequence, called the Fibonacci sequence,
 // and characterized by the fact that every number after
 // the first two is the sum of the two
-// preceding ones : 0, 1, 1, 2, 3, 5, 8, 13, 21...
+//                  0, 1, 2, 3, 4, 5, 6,  7,  8,  9, 10
+// preceding ones : 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55...
 //
 // It does not work for negative numbers and your function
 // should return `null` if tried with a negative number.
@@ -14,7 +15,13 @@
 // even several times
 
 function fibo(n) {
-  // your code here
+  if (typeof n === "string") return null;
+  if (n<0) return null;
+  if (n===0) return 0;
+  if (n<=2) return 1;
+  if (n >= 3) {
+    return fibo(n-2) + fibo(n-1);
+  }
 }
 
 // do not remove this line, it is for tests
