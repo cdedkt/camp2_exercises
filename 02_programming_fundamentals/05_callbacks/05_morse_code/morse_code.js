@@ -45,6 +45,7 @@ const MORSE_CODE = {
   "----.": "9"
 };
 
+
 function decodeSymbol(symbol) {
   if (symbol === "SP") {
     return " ";
