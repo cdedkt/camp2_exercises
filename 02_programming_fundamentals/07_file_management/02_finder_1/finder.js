@@ -19,10 +19,51 @@ If you select a file:
 
     Navigating through our files has never been so enjoyable!
 */
+const fs = require("fs");
+const path = require("path");
+const readline = require("readline");
+
+const reader = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+function displayFolderDetail(folder) {
+  console.log("folder : ", folder);
+  fs.readdir(folder, (err, elements) => {
+    if (err) {
+      console.log(err);
+    } else {
+      elements.forEach((element, index) => {
+        const elementWithPath = path.resolve(folder, element);
+        fs.stat(elementWithPath, (err, stat) => {
+          if (stat && stat.isDirectory()) {
+            console.log((index+1) + ". " + element + "/");
+          } else {
+            console.log((index+1) + ". " + element);
+          }
+        }); // fs.stat
+      }); // forEach
+      reader.question("Choose a number > ", currentAction => {
+          console.log(currentAction);
+          if (currentAction === "q") {
+            console.log("AU REVOIR");
+            reader.close();
+          } else {
+            //traitement
+            displayFolderDetail(folder);
+          }
+      }); //reader.question
+    }
+  }); // fs.readdir
+}
+
 
 
 function finder() {
-  // Your code here
+  const initialFolder = path.resolve(".");
+  displayFolderDetail(initialFolder);
 }
 
+finder();
 module.exports = finder;
