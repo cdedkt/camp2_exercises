@@ -3,4 +3,19 @@
 //
 // The function returns a boolean indicating if it successfully removed the file.
 
-module.exports = deleteFile
+const fs = require("fs");
+
+function deleteFile(filename) {
+  try {
+    fs.unlinkSync(filename);
+    console.log("successfully deleted ", filename);
+    return true;
+  } catch (err) {
+    console.log("error deleted ", filename);
+    return false;
+  }
+}
+
+console.log(deleteFile("temp.txt"));
+
+module.exports = deleteFile;
