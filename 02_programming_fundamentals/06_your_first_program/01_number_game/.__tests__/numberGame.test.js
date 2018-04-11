@@ -9,7 +9,7 @@ beforeAll(() => {
   return studentCode;
 });
 
-test("should work", () => {
+test.only("should work", () => {
   return studentCode.then(code => {
     const random = jest.fn();
     random.mockReturnValueOnce(0.13);

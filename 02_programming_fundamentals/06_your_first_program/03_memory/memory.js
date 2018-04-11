@@ -1,6 +1,5 @@
 // This function will clear the terminal when called
 const clear = require("cli-clear");
-
 const readline = require("readline");
 
 const reader = readline.createInterface({
@@ -8,9 +7,7 @@ const reader = readline.createInterface({
   output: process.stdout
 });
 
-
 const SEP = "  ";
-
 const cards = ["🐰", "🐰", "🎃", "🎃", "🌲","🌲"];
 
 function displayAllCards(pcards) {
@@ -58,5 +55,5 @@ function play(initialCards, foundCards) {
 const foundCards = initializeFoundCards(cards);
 console.log(displayAllCards(cards));
 console.log(displayAllCards(foundCards));
-//console.log(displaySelectedCards(cards, 1, 3));
+
 play(cards, foundCards);

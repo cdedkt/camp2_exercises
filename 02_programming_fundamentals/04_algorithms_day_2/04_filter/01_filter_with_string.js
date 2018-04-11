@@ -15,3 +15,5 @@ function filter(array, str) {
 
 // do not remove this line, it is for tests
 module.exports = filter;
+
+console.log(filter([1, 2, 4, 6], "even"));
