@@ -33,10 +33,10 @@ const orangeTree =  {
       }
     }
 
-    if (this.age>50 && this.age<100) {
+    if (this.age>=100 || this.age === getRandomNumberBetween(51, 100)) {
       this.alive = false;
     }
-    
+
     return this;
   },
 
@@ -51,13 +51,19 @@ const orangeTree =  {
   print: function() {
     console.log(`age: ${this.age}, alive: ${this.alive}, height: ${this.height}, oranges: ${this.oranges}`);
   }
+
 };
+
+function getRandomNumberBetween(minNumber, maxNumber) {
+  return Math.floor(Math.random() * Math.floor(maxNumber-minNumber)+1)+minNumber;
+}
 
 orangeTree.seed();
 orangeTree.print();
-for (let i=1; i<=110; i++) {
-  orangeTree.ageOneYear();
-  orangeTree.print();
-}
+orangeTree.ageOneYear();
+orangeTree.print();
+orangeTree.ageOneYear();
+orangeTree.print();
+
 
 module.exports = orangeTree;
