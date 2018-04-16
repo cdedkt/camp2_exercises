@@ -59,7 +59,8 @@ function initializePlay() {
   return play;
 }
 
-function displayCurrentGrid(grid) {
+
+function renderGrid(grid) {
   grid.cell.forEach(element => {
     console.log(element.join(" "));
   });
@@ -76,19 +77,13 @@ function isPlayWin(play) {
 }
 
 function oneLineIsWin(grid, symbol) {
-  for (let l=0; l<grid.nbLine; l++) {
-    let win = true;
-    for (let c=0; c<grid.nbColumn; c++) {
-      if (grid.cell[l][c] !== symbol) {
-        win = false;
-      }
+  let win = false;
+  grid.cell.forEach(line => {
+    if (line.every(element => element === symbol)) {
+      win = true;
     }
-    if (win) {
-      //console.log("Line Win : " + (l+1) + " " + symbol);
-      return true;
-    }
-  }
-  return false;
+  });
+  return win;
 }
 
 function oneColumnIsWin(grid, symbol) {
@@ -161,32 +156,33 @@ function applyChoice(play, choice) {
 }
 
 
+function handleInput(input) {
+  if (applyChoice(play, input)) {
+    if (isPlayWin(play)) {
+      renderGrid(play.grid);
+      console.log("BRAVO " + play.players[play.currentPlayer].name);
+      reader.close();
+    } else if (isPlayLost(play)) {
+      renderGrid(play.grid);
+      console.log("PERDU !!");
+      reader.close();
+    } else {
+      play.nextPlayer();
+      playOnce(play, false);
+    }
+  } else {
+    playOnce(play, true);
+  }
+}
+
+
 function playOnce(play, replaySameUser) {
-
-  displayCurrentGrid(play.grid);
-
+  renderGrid(play.grid);
   let messageToDisplay = `${play.players[play.currentPlayer].name} (${play.players[play.currentPlayer].symbol})  > `;
   if (replaySameUser) {
     messageToDisplay += " TRY AGAIN !!! > ";
   }
-  reader.question(messageToDisplay, currentChoice => {
-    if (applyChoice(play, currentChoice)) {
-      if (isPlayWin(play)) {
-        displayCurrentGrid(play.grid);
-        console.log("BRAVO " + play.players[play.currentPlayer].name);
-        reader.close();
-      } else if (isPlayLost(play)) {
-        displayCurrentGrid(play.grid);
-        console.log("PERDU !!");
-        reader.close();
-      } else {
-        play.nextPlayer();
-        playOnce(play, false);
-      }
-    } else {
-      playOnce(play, true);
-    }
-  });
+  reader.question(messageToDisplay, handleInput);
 }
 
 
