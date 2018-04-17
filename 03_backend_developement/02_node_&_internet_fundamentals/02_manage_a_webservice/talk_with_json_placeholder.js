@@ -138,7 +138,6 @@ function updatePostTitle(postId, newTitle, callback) {
       url: `http://jsonplaceholder.typicode.com/posts/${postId}`,
       method: "PATCH",
       form: {
-        "postId": postId,
         "title": newTitle
       }
     },
@@ -158,7 +157,6 @@ function updatePostBody(postId, newBody, callback) {
       url: `http://jsonplaceholder.typicode.com/posts/${postId}`,
       method: "PATCH",
       form: {
-        "postId": postId,
         "body": newBody
       }
     },
@@ -178,7 +176,6 @@ function updatePost(postId, newTitle, newBody, callback) {
       url: `http://jsonplaceholder.typicode.com/posts/${postId}`,
       method: "PATCH",
       form: {
-        "postId": postId,
         "title": newTitle,
         "body": newBody
       }
