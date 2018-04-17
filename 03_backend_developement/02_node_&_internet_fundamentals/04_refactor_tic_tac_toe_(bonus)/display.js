@@ -1,4 +1,4 @@
-const state = require("./state");
+
 
 function renderCell(cell) {
   if (cell === null) {
@@ -8,15 +8,15 @@ function renderCell(cell) {
   }
 }
 
-function renderRow(letter) {
+function renderRow(state, letter) {
   const cells = state[letter];
   const row = cells.map(renderCell).join(" | ");
   return `${letter} ${row}`;
 }
 
-function renderBoard() {
+function renderBoard(state) {
   const letters = Object.keys(state);
-  const rows = letters.map(renderRow).join("\n");
+  const rows = letters.map(element => renderRow(state, element)).join("\n");
   const header = "  1   2   3";
   return `${header}\n${rows}`;
 }

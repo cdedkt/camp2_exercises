@@ -1,4 +1,3 @@
-const state = require("./state");
 const display = require("./display");
 const tools = require("./tools");
 
@@ -8,6 +7,12 @@ const reader = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
+
+const state = {
+  a: Array(3).fill(null),
+  b: Array(3).fill(null),
+  c: Array(3).fill(null)
+};
 
 const WINNING_COORDINATES = [
   [{letter: "a", digit: "0"}, {letter: "a", digit: "1"}, {letter: "a", digit: "2"}],
@@ -27,11 +32,11 @@ function handleInput(input) {
   if (coordinate) {
     updateState(coordinate);
     if (hasWinner()) {
-      console.log(display.renderBoard());
+      console.log(display.renderBoard(state));
       console.log(`Congratulations ${currentPlayer}, you won! ＼(＾O＾)／`);
       reader.close();
     } else if (gameIsFinished(state)) {
-      console.log(display.renderBoard());
+      console.log(display.renderBoard(state));
       console.log("Looks like it's a tie. Thanks for playing! ¯\\_(ツ)_/¯");
       reader.close();
     } else {
@@ -70,7 +75,7 @@ function nextPlayer() {
 }
 
 function playTurn() {
-  console.log(display.renderBoard());
+  console.log(display.renderBoard(state));
   reader.question(`${currentPlayer}: What is your move? e.g: a1\n`, handleInput);
 }
 
