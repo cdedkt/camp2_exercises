@@ -1,3 +1,7 @@
+const state = require("./state");
+const display = require("./display");
+const tools = require("./tools");
+
 const readline = require("readline");
 
 const reader = readline.createInterface({
@@ -16,12 +20,6 @@ const WINNING_COORDINATES = [
   [{letter: "a", digit: "2"}, {letter: "b", digit: "2"}, {letter: "c", digit: "2"}]
 ];
 
-const state = {
-  a: Array(3).fill(null),
-  b: Array(3).fill(null),
-  c: Array(3).fill(null)
-};
-
 let currentPlayer;
 
 function handleInput(input) {
@@ -29,11 +27,11 @@ function handleInput(input) {
   if (coordinate) {
     updateState(coordinate);
     if (hasWinner()) {
-      console.log(renderBoard());
+      console.log(display.renderBoard());
       console.log(`Congratulations ${currentPlayer}, you won! ＼(＾O＾)／`);
       reader.close();
     } else if (gameIsFinished(state)) {
-      console.log(renderBoard());
+      console.log(display.renderBoard());
       console.log("Looks like it's a tie. Thanks for playing! ¯\\_(ツ)_/¯");
       reader.close();
     } else {
@@ -72,7 +70,7 @@ function nextPlayer() {
 }
 
 function playTurn() {
-  console.log(renderBoard());
+  console.log(display.renderBoard());
   reader.question(`${currentPlayer}: What is your move? e.g: a1\n`, handleInput);
 }
 
@@ -82,40 +80,10 @@ function start() {
   playTurn();
 }
 
-function renderCell(cell) {
-  if (cell === null) {
-    return "_";
-  } else {
-    return cell;
-  }
-}
-
-function renderRow(letter) {
-  const cells = state[letter];
-
-  const row = cells.map(renderCell).join(" | ");
-
-  return `${letter} ${row}`;
-}
-
-function renderBoard() {
-  const letters = Object.keys(state);
-
-  const rows = letters.map(renderRow).join("\n");
-
-  const header = "  1   2   3";
-
-  return `${header}\n${rows}`;
-}
-
-function flattenArray(arrayOfArray) {
-  return arrayOfArray.reduce((newArray, array) => newArray.concat(array), []);
-}
-
 function gameIsFinished(state) {
-  const allValues = flattenArray(Object.values(state));
+  const allValues = tools.flattenArray(Object.values(state));
 
-  return allValues.every(isNotNull);
+  return allValues.every(tools.isNotNull);
 }
 
 function hasWinner() {
@@ -129,10 +97,6 @@ function hasWinner() {
   };
 
   return WINNING_COORDINATES.some(isWinningLine);
-}
-
-function isNotNull(value) {
-  return value !== null;
 }
 
 start();
