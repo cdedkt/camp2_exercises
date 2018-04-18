@@ -5,12 +5,11 @@ function putLitersOfCoffee(numberOfLiters) {
 }
 
 function consumeLitersOfCoffee(numberOfLiters) {
-  if (litersOfCoffee >= numberOfLiters) {
-    litersOfCoffee -= numberOfLiters;
-    return true;
-  } else {
+  if (litersOfCoffee < numberOfLiters) {
     return false;
   }
+  litersOfCoffee -= numberOfLiters;
+  return true;
 }
 
 module.exports = {

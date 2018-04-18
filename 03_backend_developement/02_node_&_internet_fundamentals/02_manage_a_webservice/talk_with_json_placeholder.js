@@ -20,7 +20,7 @@ function fetchPosts(callback) {
 function fetchPostByUser(userId, callback) {
   request(
     {
-      url: `http://jsonplaceholder.typicode.com/posts?userId=${userId}`,
+      url: `http://jsonplaceholder.typicode.com/users/${userId}/posts`,
       method: "GET"
     },
     function(error, response, result) {
@@ -95,9 +95,9 @@ function publishPost(userId, title, body, callback) {
       url: `http://jsonplaceholder.typicode.com/posts`,
       method: "POST",
       form: {
-        "userId": userId,
-        "title": title,
-        "body": body
+        userId: userId,
+        title: title,
+        body: body
       }
     },
     function(error, response, result) {
@@ -116,10 +116,10 @@ function publishComment(postId, name, email, body, callback)  {
       url: `http://jsonplaceholder.typicode.com/comments`,
       method: "POST",
       form: {
-        "postId": postId,
-        "name": name,
-        "email": email,
-        "body": body
+        postId: postId,
+        name: name,
+        email: email,
+        body: body
       }
     },
     function(error, response, result) {
@@ -138,7 +138,7 @@ function updatePostTitle(postId, newTitle, callback) {
       url: `http://jsonplaceholder.typicode.com/posts/${postId}`,
       method: "PATCH",
       form: {
-        "title": newTitle
+        title: newTitle
       }
     },
     function(error, response, result) {
@@ -157,7 +157,7 @@ function updatePostBody(postId, newBody, callback) {
       url: `http://jsonplaceholder.typicode.com/posts/${postId}`,
       method: "PATCH",
       form: {
-        "body": newBody
+        body: newBody
       }
     },
     function(error, response, result) {
@@ -176,8 +176,8 @@ function updatePost(postId, newTitle, newBody, callback) {
       url: `http://jsonplaceholder.typicode.com/posts/${postId}`,
       method: "PATCH",
       form: {
-        "title": newTitle,
-        "body": newBody
+        title: newTitle,
+        body: newBody
       }
     },
     function(error, response, result) {
@@ -190,9 +190,9 @@ function updatePost(postId, newTitle, newBody, callback) {
   );
 }
 //fetchPosts(echo);
-//publishPost("2", "my title", "my body", echo);
+publishPost("2", "my title", "my body", echo);
 //publishComment(2, "myname", "myemail", "mybody", echo);
-updatePostTitle(2, "my new title", echo);
+//updatePostTitle(2, "my new title", echo);
 
 module.exports = {
   fetchPosts: fetchPosts,
