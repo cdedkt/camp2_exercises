@@ -4,4 +4,6 @@ function toWords(sentence) {
   return allWords.filter(word => word !== "");
 }
 
+console.log(toWords("I'm so good"));
+
 module.exports = toWords;
