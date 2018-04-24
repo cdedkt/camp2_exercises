@@ -11,7 +11,7 @@ create table purchases (
   client_name varchar(255),
   euros_spent integer,
   fidelity_points_earned integer,
-  purchase_date timestamp,
+  purchase_date timestamp, --date sans les heures
   number_of_items integer
 );
 
