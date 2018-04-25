@@ -22,6 +22,9 @@ app.get("/brands/:id", getBrand);
 app.get("/brands", getBrands);
 app.get("/products/:id", getProduct);
 app.get("/products", getProducts);
+app.get("*", function(request, result) {
+  result.send("page not found !!");
+})
 
 app.listen(port, function () {
   console.log("Server listening on port:" + port);
