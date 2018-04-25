@@ -1,41 +1,39 @@
 const PG = require("pg");
 
-function findAll(callback) {
+function findAll() {
   const client = new PG.Client();
   client.connect();
 
-  client.query(
+  return client.query(
     "SELECT * FROM categories",
-    [],
-    function(error, result) {
-      if (error) {
-        console.warn(error);
-      } else {
-        //console.log(result.rows);
-        callback(result.rows);
-      }
+    [])
+    .then((result) => result.rows)
+    .then((data) => {
       client.end();
-    }
-  );
+      return data;
+    })
+    .catch((error) => {
+      console.warn(error);
+      client.end();
+    });
 }
 
-function findById(id, callback) {
+function findById(id) {
   const client = new PG.Client();
   client.connect();
 
-  client.query(
+  return client.query(
     "SELECT * FROM categories where id=$1::uuid",
-    [id],
-    function(error, result) {
-      if (error) {
-        console.warn(error);
-      } else {
-        //console.log(result.rows);
-        callback(result.rows);
-      }
+    [id])
+    .then((result) => result.rows)
+    .then((data) => {
       client.end();
-    }
-  );
+      return data;
+    })
+    .catch((error) => {
+      console.warn(error);
+      client.end();
+    });
 }
 
 
@@ -43,19 +41,18 @@ function getProductsFromCategory(id, callback) {
   const client = new PG.Client();
   client.connect();
 
-  client.query(
+  return client.query(
     "SELECT p.* FROM products p inner join lien_categories_products lcp on lcp.product_id = p.id where lcp.category_id=$1::uuid",
-    [id],
-    function(error, result) {
-      if (error) {
-        console.warn(error);
-      } else {
-        //console.log(result.rows);
-        callback(result.rows);
-      }
+    [id])
+    .then((result) => result.rows)
+    .then((data) => {
       client.end();
-    }
-  );
+      return data;
+    })
+    .catch((error) => {
+      console.warn(error);
+      client.end();
+    });
 }
 
 function insertCategories(categories) {
