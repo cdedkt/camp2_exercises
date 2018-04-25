@@ -24,7 +24,7 @@ create table products (
 );
 
 create table lien_categories_products (
-  categorie_id uuid,
+  category_id uuid,
   product_id uuid
 );
-ALTER TABLE lien_categories_products ADD PRIMARY KEY (categorie_id, product_id);
+ALTER TABLE lien_categories_products ADD PRIMARY KEY (category_id, product_id);
