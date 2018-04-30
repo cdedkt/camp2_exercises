@@ -66,8 +66,44 @@ function insertNextBrand(client, brands, indice) {
   );
 }
 
+function insertBrandsPromise(brands) {
+  console.log("INSERT BRANDS PROMISE : " + brands.length + " lines have to be inserted.");
+  const client = new PG.Client();
+  client.connect();
+
+  let indice = 0;
+  const promiseBrand = new Promise();
+  insertNextBrandPromise(client, null, brands, indice);
+}
+
+function insertNextBrandPromise(client, promiseBrand, brands, indice) {
+  promiseBrand.then(
+    const newPromiseBrand = client.query(
+      "INSERT INTO brands (id, title) values ($1::uuid, $2::varchar)",
+      [brands[indice].id, brands[indice].title]
+      .then((result) => result.rows)
+      .then((data) => {
+        indice++;
+        if (indice<brands.length) {
+          insertNextBrandPromise(client, newPromiseBrand, brands, indice);
+        } else {
+          console.log("INSERT BRANDS PROMISE OK : " + indice + " lines inserted.");
+          client.end();
+        }
+      })
+      .catch((error) => {
+        console.warn(error);
+        client.end();
+      });
+    )
+  )
+}
+
+
+
 module.exports = {
   findAll: findAll,
   findById: findById,
   insertBrands: insertBrands,
+  insertBrandsPromise: insertBrandsPromise
 }
