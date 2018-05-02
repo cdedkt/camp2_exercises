@@ -95,7 +95,7 @@ function insertNextBrandPromise(client, promiseBrand, brands, indice) {
         console.warn(error);
         client.end();
       });
-    )
+    );
   )
 }
 
