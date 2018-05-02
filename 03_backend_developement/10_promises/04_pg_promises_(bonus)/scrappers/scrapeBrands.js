@@ -10,11 +10,13 @@ function scrapeBrands() {
     })
   .then((response) => response.json())
   .then((brands) => {
-     return brands.insertBrandsPromise(brands);
+    console.log(brands);
+     //return brands.insertBrandsPromise(brands);
     })
   .catch((error) => {
       console.warn(error);
   });
 }
 
-scrapeBrands();
+console.log("debut");
+//scrapeBrands();
