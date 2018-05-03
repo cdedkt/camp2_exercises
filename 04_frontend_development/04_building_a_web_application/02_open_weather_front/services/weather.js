@@ -1,9 +1,12 @@
 const fetch = require("node-fetch");
 
 function weatherByCityName(city) {
-  const appid = process.env.WEATHER_KEY;
-  const url = process.env.WEATHER_URL;
+  //const appid = process.env.WEATHER_KEY;
+  //const url = process.env.WEATHER_URL;
 
+  const appid = "bca262add92c9ed101258da9e961b2b3";
+  const url = "http://api.openweathermap.org/data/2.5/weather";
+  
   return fetch(
     `${url}?q=${city}&appid=${appid}&units=metric`,
     {method: "GET"}
