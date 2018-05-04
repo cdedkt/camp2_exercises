@@ -3,7 +3,6 @@ const path = require("path");
 
 
 function completeIndex(weather) {
-  //console.log(weather);
   const fileToRead = path.resolve(".", "public/index.html");
 
   const html = fs.readFileSync(fileToRead).toString();
