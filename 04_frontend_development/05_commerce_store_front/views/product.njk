@@ -1,5 +1,12 @@
 {% extends "layout.njk" %}
 
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
+  <li class="breadcrumb-item"><a href="/categories/{{category.id}}/products">{{category.label}}</a></li>
+  <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
+{% endblock %}
+
+
 {% block content %}
 
 <div class="container pt-3">

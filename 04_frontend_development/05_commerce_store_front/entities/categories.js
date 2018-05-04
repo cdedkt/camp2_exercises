@@ -36,14 +36,31 @@ function findById(id) {
     });
 }
 
-
-function getProductsFromCategory(id, callback) {
+function getProductsFromCategory(category_id) {
   const client = new PG.Client();
   client.connect();
 
   return client.query(
     "SELECT p.* FROM products p inner join lien_categories_products lcp on lcp.product_id = p.id where lcp.category_id=$1::uuid",
-    [id])
+    [category_id])
+    .then((result) => result.rows)
+    .then((data) => {
+      client.end();
+      return data;
+    })
+    .catch((error) => {
+      console.warn(error);
+      client.end();
+    });
+}
+
+function getCategoryFromProduct(product_id) {
+  const client = new PG.Client();
+  client.connect();
+
+  return client.query(
+    "SELECT c.* FROM categories c inner join lien_categories_products lcp on lcp.category_id = c.id where lcp.product_id=$1::uuid",
+    [product_id])
     .then((result) => result.rows)
     .then((data) => {
       client.end();
@@ -89,5 +106,6 @@ module.exports = {
   findAll: findAll,
   findById: findById,
   getProductsFromCategory: getProductsFromCategory,
+  getCategoryFromProduct: getCategoryFromProduct,
   insertCategories: insertCategories
 }

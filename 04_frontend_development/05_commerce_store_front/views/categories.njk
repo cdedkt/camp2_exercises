@@ -1,5 +1,9 @@
 {% extends "layout.njk" %}
 
+{% block breadcrumb %}
+  <li class="breadcrumb-item active" aria-current="page">Categories</li>
+{% endblock %}
+
 {% block content %}
   <div class="container">
     <div class="row text-white bg-dark pt-1 pb-1">
@@ -8,7 +12,7 @@
       </div>
     </div>
     {% for category in categories %}
-      <div class="row pt-1 pb-1 text-primary ">
+      <div class="row pt-1 pb-1 text-primary">
         <div class="col-12 col-md-4">
           <a href="/categories/{{category.id}}/products">{{category.label}}</a>
 
@@ -17,3 +21,15 @@
     {% endfor %}
   </div>
 {% endblock %}
+
+<script>
+  let ind = 0;
+  function getColor() {
+    ind++;
+    if (ind % 2 === 0) {
+      return "bg-primary";
+    } else {
+      return "bg-secondary";
+    }
+  }
+</script>
