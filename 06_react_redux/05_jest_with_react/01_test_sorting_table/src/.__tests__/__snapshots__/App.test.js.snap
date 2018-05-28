@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should be sortable by title 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th
+        onClick={[Function]}
+      >
+        ID
+      </th>
+      <th
+        onClick={[Function]}
+      >
+        Title
+      </th>
+      <th
+        onClick={[Function]}
+      >
+        Price
+      </th>
+    </tr>
+  </thead>
+  <tr>
+    <td>
+      10
+    </td>
+    <td>
+      Title 10
+    </td>
+    <td>
+      9.99
+    </td>
+  </tr>
+  <tr>
+    <td>
+      20
+    </td>
+    <td>
+      Title 20
+    </td>
+    <td>
+      9.99
+    </td>
+  </tr>
+  <tr>
+    <td>
+      30
+    </td>
+    <td>
+      Title 30
+    </td>
+    <td>
+      54.99
+    </td>
+  </tr>
+</table>
+`;
+
+exports[`App should be sortable by title 2`] = `
+<table>
+  <thead>
+    <tr>
+      <th
+        onClick={[Function]}
+      >
+        ID
+      </th>
+      <th
+        onClick={[Function]}
+      >
+        Title
+      </th>
+      <th
+        onClick={[Function]}
+      >
+        Price
+      </th>
+    </tr>
+  </thead>
+  <tr>
+    <td>
+      30
+    </td>
+    <td>
+      Title 30
+    </td>
+    <td>
+      54.99
+    </td>
+  </tr>
+  <tr>
+    <td>
+      20
+    </td>
+    <td>
+      Title 20
+    </td>
+    <td>
+      9.99
+    </td>
+  </tr>
+  <tr>
+    <td>
+      10
+    </td>
+    <td>
+      Title 10
+    </td>
+    <td>
+      9.99
+    </td>
+  </tr>
+</table>
+`;
+
+exports[`App should contain a table 1`] = `
+<table>
+  <thead>
+    <tr>
+      <th
+        onClick={[Function]}
+      >
+        ID
+      </th>
+      <th
+        onClick={[Function]}
+      >
+        Title
+      </th>
+      <th
+        onClick={[Function]}
+      >
+        Price
+      </th>
+    </tr>
+  </thead>
+  <tr>
+    <td>
+      10
+    </td>
+    <td>
+      Title 10
+    </td>
+    <td>
+      9.99
+    </td>
+  </tr>
+  <tr>
+    <td>
+      20
+    </td>
+    <td>
+      Title 20
+    </td>
+    <td>
+      9.99
+    </td>
+  </tr>
+  <tr>
+    <td>
+      30
+    </td>
+    <td>
+      Title 30
+    </td>
+    <td>
+      54.99
+    </td>
+  </tr>
+</table>
+`;

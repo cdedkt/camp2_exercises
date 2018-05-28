@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 
+function fetchDog() {
+  return fetch(
+    `https://random.dog/woof.json`,
+    {method: "GET"}
+  )
+  .then((response) => response.json());
+}
+
 class DogApp extends Component {
   constructor(props) {
     super(props);
@@ -10,11 +18,7 @@ class DogApp extends Component {
   }
 
   nextImage() {
-    fetch(
-      `https://random.dog/woof.json`,
-      {method: "GET"}
-    )
-      .then((response) => response.json())
+    fetchDog()
       .then((dog) => {
         console.log("dog.url=",dog.url);
         this.setState({
@@ -31,7 +35,11 @@ class DogApp extends Component {
     return (
       <div className="App">
         <br/>
-        <img src={this.state.url}/>
+        {this.state.url
+          ? <img src={this.state.url}/>
+          : null
+        }
+
         <br/>
         <br/>
         <button onClick={() => this.nextImage()}>next</button>

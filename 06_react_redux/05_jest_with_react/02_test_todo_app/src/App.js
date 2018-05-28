@@ -57,7 +57,7 @@ class App extends Component {
       <div className="Todo">
         <div className="new-todo">
           <form onSubmit={this.addTask}>
-            <input type="text" value={this.state.newTask} onChange={this.handleNewTask} />
+            <input  type="text" id="inputNewTask" value={this.state.newTask} onChange={this.handleNewTask} />
             <button type="submit">Add</button>
           </form>
         </div>

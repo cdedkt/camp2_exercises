@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import _ from "underscore";
 
-function Row(props) {
+function Row(props, index) {
   return (
-    <tr>
+    <tr key={index}>
       <td>{props.decathlon_id}</td>
       <td>{props.title}</td>
       <td>{props.price}</td>
