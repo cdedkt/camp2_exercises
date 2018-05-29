@@ -20,12 +20,6 @@ const About = () => (
   <h2>About</h2>
 )
 
-// const Article = (props) => (
-//   <div>
-//     <h3>the content of article n° {props.match.params.articleId}</h3>
-//     <span>The author is {props.author}</span>
-//   </div>
-// )
 
 const ArticleDetail = ({ match }) => (
   <div>
@@ -101,6 +95,7 @@ class BasicExample extends Component {
           <li><NavLink exact className="Link-not-selected" activeClassName="Link-selected" to="/articles">Articles</NavLink></li>
           <li><NavLink className="Link-not-selected" activeClassName="Link-selected" to="/articles/42">Article 42</NavLink></li>
           <li><NavLink className="Link-not-selected" activeClassName="Link-selected" to="/articles/1337">Article 1337</NavLink></li>
+          <li><NavLink className="Link-not-selected" activeClassName="Link-selected" to="/login">login</NavLink></li>
         </ul>
 
         <hr/>
