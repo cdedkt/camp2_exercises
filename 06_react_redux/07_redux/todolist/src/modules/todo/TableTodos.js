@@ -15,6 +15,7 @@ class TableTodos extends Component {
     this.handleSubmitNewTodo = this.handleSubmitNewTodo.bind(this);
     this.handleOrderColumn = this.handleOrderColumn.bind(this);
     this.handleSubmitResetAllTodo = this.handleSubmitResetAllTodo.bind(this);
+	this.handleSubmitLoadTodo = this.handleSubmitLoadTodo.bind(this);
   }
 
   capitalize(value) {
@@ -35,8 +36,12 @@ class TableTodos extends Component {
   }
 
   handleSubmitResetAllTodo(event) {
-    //alert("Reset All todos");
     this.props.resetTodoList();
+    event.preventDefault();
+  }
+  
+  handleSubmitLoadTodo(event) {
+    this.props.loadTodoList();
     event.preventDefault();
   }
 
@@ -84,8 +89,12 @@ class TableTodos extends Component {
         <form className="mt-4" onSubmit={this.handleSubmitResetAllTodo}>
           <input type="submit" value="Reset All Todos" />
         </form>
+		<form onSubmit={this.handleSubmitLoadTodo}>
+          <input type="submit" value="Load Brands Todos" />
+        </form>
 
-
+		
+		
         <textarea className="mt-4"
           style={{width:700, height:200}}
           value={JSON.stringify(this.props.todoList)}

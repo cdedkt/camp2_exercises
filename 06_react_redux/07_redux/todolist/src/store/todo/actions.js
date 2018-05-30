@@ -37,3 +37,10 @@ export function reset() {
     type: "RESET_TODO_LIST",
   }
 }
+
+export function load(_todoList) {
+  return {
+    type: "LOAD_TODO_LIST",
+	todoList: _todoList,
+  }
+}

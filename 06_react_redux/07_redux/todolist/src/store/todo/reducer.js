@@ -88,6 +88,14 @@ function todoReducer(state = initialState, action) {
         todos: newTodoListReset,
         fetching: false,
       }
+	  
+	  case "LOAD_TODO_LIST":
+      const newTodoListLoad = action.todoList;
+      return {
+        ...state,
+        todos: newTodoListLoad,
+        fetching: false,
+      }
 
       case "FETCHING":
       return {
