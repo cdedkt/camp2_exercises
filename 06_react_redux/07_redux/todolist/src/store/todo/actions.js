@@ -1,0 +1,39 @@
+export function add(_todoLabel) {
+  return {
+    type: "ADD_TODO",
+    todoLabel: _todoLabel,
+  }
+}
+
+export function check(_todoId) {
+  return {
+    type: "CHECK_TODO",
+    todoId: _todoId,
+  }
+}
+
+export function remove(_todoId) {
+  return {
+    type: "REMOVE_TODO",
+    todoId: _todoId,
+  }
+}
+
+export function order(_column) {
+  return {
+    type: "ORDER_TODO_LIST",
+    column: _column,
+  }
+}
+
+export function fetching() {
+  return {
+    type: "FETCHING"
+  }
+}
+
+export function reset() {
+  return {
+    type: "RESET_TODO_LIST",
+  }
+}
