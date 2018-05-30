@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should contain a input 1`] = `
+<div
+  className="Todo"
+>
+  <div
+    className="new-todo"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        id="inputNewTask"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <button
+        type="submit"
+      >
+        Add
+      </button>
+    </form>
+  </div>
+  <ul
+    className="todos"
+  />
+</div>
+`;
+
+exports[`App should have a clikable form 1`] = `
+<div
+  className="Todo"
+>
+  <div
+    className="new-todo"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        id="inputNewTask"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <button
+        type="submit"
+      >
+        Add
+      </button>
+    </form>
+  </div>
+  <ul
+    className="todos"
+  >
+    <li
+      className="task"
+    >
+      <span>
+        
+      </span>
+      <input
+        onChange={[Function]}
+        type="checkbox"
+        value={false}
+      />
+    </li>
+  </ul>
+</div>
+`;
