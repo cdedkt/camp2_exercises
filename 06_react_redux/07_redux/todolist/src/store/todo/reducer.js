@@ -8,6 +8,7 @@ const initialState = {
   sortedDesc: false,
   nextTodoId: 1000,
   fetching: false,
+  error: "No error",
 };
 
 function checkTodo(todoList, todoId) {
@@ -41,7 +42,6 @@ function sortTodoList(todoList, sortedBy, sortedDesc) {
 function todoReducer(state = initialState, action) {
   switch (action.type) {
     case "CHECK_TODO":
-      console.log("CHECK_TODO", action.todoId);
       const newTodoList = checkTodo(state.todos, action.todoId);
       return {
         ...state,
@@ -70,25 +70,25 @@ function todoReducer(state = initialState, action) {
         todos: newTodoListAdd
       }
 
-      case "ORDER_TODO_LIST":
-        const newSortedBy = action.column;
-        const newSortedDesc = (newSortedBy === state.sortedBy) && !state.sortedDesc;
-        const newTodoListOrder = sortTodoList(state.todos, newSortedBy, newSortedDesc);
-        return {
-          ...state,
-          sortedBy: newSortedBy,
-          sortedDesc: newSortedDesc,
-          todos: newTodoListOrder,
-        }
-
-      case "RESET_TODO_LIST":
-      const newTodoListReset = [];
+    case "ORDER_TODO_LIST":
+      const newSortedBy = action.column;
+      const newSortedDesc = (newSortedBy === state.sortedBy) && !state.sortedDesc;
+      const newTodoListOrder = sortTodoList(state.todos, newSortedBy, newSortedDesc);
       return {
         ...state,
-        todos: newTodoListReset,
-        fetching: false,
+        sortedBy: newSortedBy,
+        sortedDesc: newSortedDesc,
+        todos: newTodoListOrder,
       }
-	  
+
+    case "RESET_TODO_LIST":
+    const newTodoListReset = [];
+    return {
+      ...state,
+      todos: newTodoListReset,
+      fetching: false,
+    }
+
 	  case "LOAD_TODO_LIST":
       const newTodoListLoad = action.todoList;
       return {
@@ -97,11 +97,19 @@ function todoReducer(state = initialState, action) {
         fetching: false,
       }
 
-      case "FETCHING":
-      return {
-        ...state,
-        fetching: true,
-      }
+    case "FETCHING":
+    return {
+      ...state,
+      fetching: true,
+    }
+
+    case "ERROR":
+    return {
+      ...state,
+      fetching: false,
+      error: action.error,
+    }
+
 
     default:
       return state

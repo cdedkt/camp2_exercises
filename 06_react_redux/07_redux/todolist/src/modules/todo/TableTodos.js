@@ -39,7 +39,7 @@ class TableTodos extends Component {
     this.props.resetTodoList();
     event.preventDefault();
   }
-  
+
   handleSubmitLoadTodo(event) {
     this.props.loadTodoList();
     event.preventDefault();
@@ -53,6 +53,13 @@ class TableTodos extends Component {
     //console.log("RENDER TableTodos", this.props.todoList);
     return (
       <div className="container">
+        <form className="mt-4" onSubmit={this.handleSubmitResetAllTodo}>
+          <input type="submit" value="Reset All Todos" />
+        </form>
+        <form onSubmit={this.handleSubmitLoadTodo}>
+          <input type="submit" value="Load Brands Todos" />
+        </form>
+
         <form className="mt-4" onSubmit={this.handleSubmitNewTodo}>
           <label>
             <span className="mr-4">New Todo :</span>
@@ -63,38 +70,33 @@ class TableTodos extends Component {
 
         {this.props.fetching
           ? <div>
-              <span className="mt-4 mb-4">LAODING IN PROGRESS</span>
+              <span className="mt-4 mb-4">LOADING IN PROGRESS</span>
             </div>
           :
-            <table className="table table-striped mt-4">
-              <thead>
-                <tr>
-                  <th scope="col" id="id" onClick={this.handleOrderColumn}>id</th>
-                  <th scope="col" id="label" onClick={this.handleOrderColumn}>label</th>
-                  <th scope="col" id="done" onClick={this.handleOrderColumn}>done</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.props.todoList.map(atodo => {
-                  return (<TableTodoRow
-                    key={atodo.id}
-                    todo={atodo}
-                  />)
-                })}
-              </tbody>
-            </table>
+            <div>
+              <div className="mt-4">Number of todos : {this.props.todoList.length}</div>
+              <table className="table table-striped mt-2">
+                <thead>
+                  <tr>
+                    <th scope="col" id="id" onClick={this.handleOrderColumn}>id</th>
+                    <th scope="col" id="label" onClick={this.handleOrderColumn}>label</th>
+                    <th scope="col" id="done" onClick={this.handleOrderColumn}>done</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.props.todoList.map(atodo => {
+                    return (<TableTodoRow
+                      key={atodo.id}
+                      todo={atodo}
+                    />)
+                  })}
+                </tbody>
+              </table>
+            </div>
         }
 
-        <form className="mt-4" onSubmit={this.handleSubmitResetAllTodo}>
-          <input type="submit" value="Reset All Todos" />
-        </form>
-		<form onSubmit={this.handleSubmitLoadTodo}>
-          <input type="submit" value="Load Brands Todos" />
-        </form>
 
-		
-		
         <textarea className="mt-4"
           style={{width:700, height:200}}
           value={JSON.stringify(this.props.todoList)}

@@ -1,4 +1,4 @@
-import { add, check, remove, order } from "./actions";
+import { add, check, remove, order, mountError } from "./actions";
 import { resetAsync, loadAsync } from "./asyncActions";
 
 export function tableTodosHandler(dispatch) {
@@ -6,7 +6,8 @@ export function tableTodosHandler(dispatch) {
     addTodo: (todoLabel)  => dispatch(add(todoLabel)),
     orderTodoList: (column)  => dispatch(order(column)),
     resetTodoList: () => dispatch(resetAsync()),
-	loadTodoList: () => dispatch(loadAsync()),
+	  loadTodoList: () => dispatch(loadAsync()),
+    mountError: (error) => dispatch(mountError()),
   }
 }
 

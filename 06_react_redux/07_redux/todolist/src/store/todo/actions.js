@@ -41,6 +41,13 @@ export function reset() {
 export function load(_todoList) {
   return {
     type: "LOAD_TODO_LIST",
-	todoList: _todoList,
+	  todoList: _todoList,
+  }
+}
+
+export function mountError(_error) {
+  return {
+    type: "ERROR",
+  	error: _error,
   }
 }
