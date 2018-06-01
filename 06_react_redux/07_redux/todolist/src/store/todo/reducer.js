@@ -41,7 +41,7 @@ function sortTodoList(todoList, sortedBy, sortedDesc = false) {
 
 function filterTodoList(todoList, filterLabel) {
   return todoList.map(todo => {
-    if (filterLabel === "" || todo.label.includes(filterLabel)) {
+    if (filterLabel === "" || todo.label.toLowerCase().includes(filterLabel)) {
       return {
         ...todo,
         hidden: false,
@@ -78,11 +78,10 @@ function todoReducer(state = initialState, action) {
       newTodo.label = action.todoLabel;
       newTodo.done = false;
 
-      const newTodoListAdd = [newTodo, ...state.todos];
       return {
         ...state,
         nextTodoId: currentTodoId + 1,
-        todos: newTodoListAdd,
+        todos: [newTodo, ...state.todos],
       }
 
     case "ORDER_TODO_LIST":

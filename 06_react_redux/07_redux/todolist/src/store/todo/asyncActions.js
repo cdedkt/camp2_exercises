@@ -28,7 +28,7 @@ export function loadAsync() {
   return dispatch => {
     dispatch(fetching());
 
-    fetchBrands()
+    return fetchBrands()
   	.then(brands => {
   		console.log("brands=", brands);
   		const todoList = brands.map(brand => {

@@ -52,7 +52,7 @@ class TableTodos extends Component {
   }
 
   handleChangeFilter(event) {
-    this.props.filterTodoLabel(event.target.value);
+    this.props.filterTodoLabel(event.target.value.toLowerCase());
   }
 
   render() {
@@ -82,6 +82,7 @@ class TableTodos extends Component {
             <div>
               <span className="mt-4 mr-5">Number of todos : {_.where(this.props.todoList, {hidden: false}).length}</span>
               <input type="text" value={this.props.filterLabel} onChange={this.handleChangeFilter} />
+
               <table className="table table-striped mt-2">
                 <thead>
                   <tr>
@@ -98,6 +99,8 @@ class TableTodos extends Component {
                         key={atodo.id}
                         todo={atodo}
                       />)
+                    } else {
+                      return null;
                     }
                   })}
                 </tbody>
