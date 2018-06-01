@@ -19,7 +19,6 @@ function fetchBrands() {
     {method: "GET"}
   )
   .then((response) => {
-	  //console.log("response=", response);
 	  return response.json()
   });
 }
@@ -30,9 +29,8 @@ export function loadAsync() {
 
     return fetchBrands()
   	.then(brands => {
-  		console.log("brands=", brands);
   		const todoList = brands.map(brand => {
-  			return {id: brand.id, label: brand.title, done: false, hidden: false}
+  			return {id: brand.id, label: brand.title, done: false}
   		});
   		dispatch(load(todoList));
   		}

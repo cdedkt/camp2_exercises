@@ -27,8 +27,8 @@ test('ASYNC_ACTIONS load todos', () => {
 
   const expectedFetchingAction = fetching();
   const expectedLoadParams = [
-      {id: "cbe1c32e-faa9-4911-ad8e-4422f2b627c9", label: "8C+", done: false, hidden: false},
-      {id: "e9b08852-1132-4e92-b062-866d1ce44833", label: "ABUS", done: false, hidden: false}
+      {id: "cbe1c32e-faa9-4911-ad8e-4422f2b627c9", label: "8C+", done: false},
+      {id: "e9b08852-1132-4e92-b062-866d1ce44833", label: "ABUS", done: false}
     ];
   const expectedLoadAction = load(expectedLoadParams);
 

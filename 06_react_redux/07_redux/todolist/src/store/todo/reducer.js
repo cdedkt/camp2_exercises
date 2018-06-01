@@ -2,16 +2,14 @@ import _ from 'underscore';
 
 import todosImport from './dataTodos';
 
-const initialFilterLabel = "";
-
 const initialState = {
-  todos: filterTodoList(sortTodoList(todosImport, "label"), initialFilterLabel),
+  todos: filterTodoList(sortTodoList(todosImport, "label")),
   sortedBy: "label",
   sortedDesc: false,
   nextTodoId: 1000,
   fetching: false,
   error: "No error",
-  filterLabel: initialFilterLabel,
+  filterLabel: "",
 };
 
 function checkTodo(todoList, todoId) {
@@ -39,7 +37,7 @@ function sortTodoList(todoList, sortedBy, sortedDesc = false) {
   return sortedDesc ? todosSorted.reverse() : todosSorted;
 }
 
-function filterTodoList(todoList, filterLabel) {
+function filterTodoList(todoList, filterLabel = "") {
   return todoList.map(todo => {
     if (filterLabel === "" || todo.label.toLowerCase().includes(filterLabel)) {
       return {
@@ -77,6 +75,7 @@ function todoReducer(state = initialState, action) {
       newTodo.id = currentTodoId.toString();
       newTodo.label = action.todoLabel;
       newTodo.done = false;
+      //newTodo.hidden = false;
 
       return {
         ...state,
@@ -104,7 +103,7 @@ function todoReducer(state = initialState, action) {
     }
 
 	  case "LOAD_TODO_LIST":
-      const newTodoListLoad = action.todoList;
+      const newTodoListLoad = filterTodoList(action.todoList);
       return {
         ...state,
         todos: newTodoListLoad,
