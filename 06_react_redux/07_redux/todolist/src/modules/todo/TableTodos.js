@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { getTodoList } from "./../../store/todo/selectors";
 import { tableTodosHandler } from "./../../store/todo/handlers";
+import _ from "underscore";
 
 import TableTodoRow from './TableTodoRow';
 
@@ -15,7 +16,8 @@ class TableTodos extends Component {
     this.handleSubmitNewTodo = this.handleSubmitNewTodo.bind(this);
     this.handleOrderColumn = this.handleOrderColumn.bind(this);
     this.handleSubmitResetAllTodo = this.handleSubmitResetAllTodo.bind(this);
-	this.handleSubmitLoadTodo = this.handleSubmitLoadTodo.bind(this);
+	  this.handleSubmitLoadTodo = this.handleSubmitLoadTodo.bind(this);
+    this.handleChangeFilter = this.handleChangeFilter.bind(this);
   }
 
   capitalize(value) {
@@ -28,25 +30,29 @@ class TableTodos extends Component {
   }
 
   handleSubmitNewTodo(event) {
+    event.preventDefault();
     if (this.state.newTodoLabel) {
       this.props.addTodo(this.state.newTodoLabel);
     }
     this.setState({newTodoLabel: ""});
-    event.preventDefault();
   }
 
   handleSubmitResetAllTodo(event) {
-    this.props.resetTodoList();
     event.preventDefault();
+    this.props.resetTodoList();
   }
 
   handleSubmitLoadTodo(event) {
-    this.props.loadTodoList();
     event.preventDefault();
+    this.props.loadTodoList();
   }
 
   handleOrderColumn(event) {
     this.props.orderTodoList(event.target.id);
+  }
+
+  handleChangeFilter(event) {
+    this.props.filterTodoLabel(event.target.value);
   }
 
   render() {
@@ -74,7 +80,8 @@ class TableTodos extends Component {
             </div>
           :
             <div>
-              <div className="mt-4">Number of todos : {this.props.todoList.length}</div>
+              <span className="mt-4 mr-5">Number of todos : {_.where(this.props.todoList, {hidden: false}).length}</span>
+              <input type="text" value={this.props.filterLabel} onChange={this.handleChangeFilter} />
               <table className="table table-striped mt-2">
                 <thead>
                   <tr>
@@ -86,10 +93,12 @@ class TableTodos extends Component {
                 </thead>
                 <tbody>
                   {this.props.todoList.map(atodo => {
-                    return (<TableTodoRow
-                      key={atodo.id}
-                      todo={atodo}
-                    />)
+                    if (!atodo.hidden) {
+                      return (<TableTodoRow
+                        key={atodo.id}
+                        todo={atodo}
+                      />)
+                    }
                   })}
                 </tbody>
               </table>

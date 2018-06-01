@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import { checkRemoveHandler } from "./../../store/todo/handlers";
 
+import './../../App.css';
+
 class TableTodoRow extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +34,7 @@ class TableTodoRow extends Component {
   render() {
     //console.log("RENDER TableTodoRow =", this.props);
     return (
-      <tr>
+     <tr>
         <td>{this.props.todo.id}</td>
         <td>{this.props.todo.label}</td>
         <td>

@@ -26,6 +26,13 @@ export function order(_column) {
   }
 }
 
+export function filterTodoLabel(_label) {
+  return {
+    type: "FILTER_TODO_LABEL",
+    label: _label,
+  }
+}
+
 export function fetching() {
   return {
     type: "FETCHING"

@@ -2,13 +2,16 @@ import _ from 'underscore';
 
 import todosImport from './dataTodos';
 
+const initialFilterLabel = "";
+
 const initialState = {
-  todos: sortTodoList(todosImport, "label", false),
+  todos: filterTodoList(sortTodoList(todosImport, "label"), initialFilterLabel),
   sortedBy: "label",
   sortedDesc: false,
   nextTodoId: 1000,
   fetching: false,
   error: "No error",
+  filterLabel: initialFilterLabel,
 };
 
 function checkTodo(todoList, todoId) {
@@ -26,33 +29,45 @@ function checkTodo(todoList, todoId) {
 }
 
 function deleteTodo(todoList, todoId) {
-  console.log("deleteTodo debut", todoId);
+  //console.log("deleteTodo debut", todoId);
   const todoModified = _.reject(todoList, function(todo){ return todo.id === todoId; });
-  //console.log("todoModified=", todoModified);
   return todoModified;
 }
 
-function sortTodoList(todoList, sortedBy, sortedDesc) {
+function sortTodoList(todoList, sortedBy, sortedDesc = false) {
   const todosSorted = _.sortBy(todoList, sortedBy);
   return sortedDesc ? todosSorted.reverse() : todosSorted;
 }
 
+function filterTodoList(todoList, filterLabel) {
+  return todoList.map(todo => {
+    if (filterLabel === "" || todo.label.includes(filterLabel)) {
+      return {
+        ...todo,
+        hidden: false,
+      }
+    } else {
+      return {
+        ...todo,
+        hidden: true,
+      }
+    }
+  })
+}
 
 
 function todoReducer(state = initialState, action) {
   switch (action.type) {
     case "CHECK_TODO":
-      const newTodoList = checkTodo(state.todos, action.todoId);
       return {
         ...state,
-        todos: newTodoList,
+        todos: checkTodo(state.todos, action.todoId),
       }
 
     case "REMOVE_TODO":
-      const newTodoListWithDelete = deleteTodo(state.todos, action.todoId);
       return {
         ...state,
-        todos: newTodoListWithDelete,
+        todos: deleteTodo(state.todos, action.todoId),
       }
 
     case "ADD_TODO":
@@ -63,11 +78,11 @@ function todoReducer(state = initialState, action) {
       newTodo.label = action.todoLabel;
       newTodo.done = false;
 
-      const newTodoListAdd = [ ...state.todos, newTodo ];
+      const newTodoListAdd = [newTodo, ...state.todos];
       return {
         ...state,
         nextTodoId: currentTodoId + 1,
-        todos: newTodoListAdd
+        todos: newTodoListAdd,
       }
 
     case "ORDER_TODO_LIST":
@@ -95,6 +110,15 @@ function todoReducer(state = initialState, action) {
         ...state,
         todos: newTodoListLoad,
         fetching: false,
+        filterLabel: "",
+      }
+
+    case "FILTER_TODO_LABEL":
+      const newTodoListFilter = filterTodoList(state.todos, action.label);
+      return {
+        ...state,
+        todos: newTodoListFilter,
+        filterLabel: action.label,
       }
 
     case "FETCHING":

@@ -16,12 +16,10 @@ function fetchBrands() {
   return fetch(
     `https://obscure-gorge-44220.herokuapp.com/brands`,
     //`http://localhost:3001/brands`,
-    //{method: "GET",}
-		//{mode: "no-cors"}
+    {method: "GET"}
   )
   .then((response) => {
-	  console.log("response=", response);
-	  //console.log("response.json=", response.json());
+	  //console.log("response=", response);
 	  return response.json()
   });
 }
@@ -34,7 +32,7 @@ export function loadAsync() {
   	.then(brands => {
   		console.log("brands=", brands);
   		const todoList = brands.map(brand => {
-  			return {id: brand.id, label: brand.title, done: false}
+  			return {id: brand.id, label: brand.title, done: false, hidden: false}
   		});
   		dispatch(load(todoList));
   		}
