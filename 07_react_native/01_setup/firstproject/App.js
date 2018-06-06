@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image, Button, ViewPagerAndroid, TouchableHighlight, TouchableOpacity } from 'react-native';
 
 
 function getContent(menu) {
@@ -18,12 +18,28 @@ function getContent(menu) {
         <Image source={require('./public/chat.jpeg')} style={{height:200}} />
       </ScrollView>
     );
-  } else {
+  } else if (menu === "menu1") {
     return (
       <ScrollView>
         <Text>Magic content of {menu}</Text>
       </ScrollView>
-    )
+    );
+  } else if (menu === "menu3") {
+    return (
+
+        <ViewPagerAndroid
+            style={styles.viewPager}
+            initialPage={0}>
+            <View style={styles.pageStyle} key="1">
+              <Text>First page 111</Text>
+              <Text>dhskjdh skfhds fdfhdjkccc jkd jkd hjkufd hjuklk fd dmlf dl jdls jdls lkds lkfds jkldskjl jklds kldskjl klds klfdskllds klds klfklds klfdsk lfdkls kld kldklfu</Text>
+            </View>
+            <View style={styles.pageStyle} key="2">
+              <Text>Second page 222</Text>
+            </View>
+        </ViewPagerAndroid>
+    
+    );
   }
 
 }
@@ -55,17 +71,16 @@ export default class App extends React.Component {
 
         {getContent(this.state.menu) }
 
-
         <View style={styles.menu}>
-          <View style={styles.menuitem1}>
-            <Button title="Page 1" onPress={() => this.changeMenu("menu1")} />
-          </View>
-          <View style={styles.menuitem2} >
-            <Button title="Page 2" onPress={() => this.changeMenu("menu2")} />
-          </View>
-          <View style={styles.menuitem3}>
-            <Button title="Page 3" onPress={() => this.changeMenu("menu3")} />
-          </View>
+          <TouchableHighlight style={styles.menuitem1} onPress={() => this.changeMenu("menu1")}>
+            <Text>Page 1</Text>
+          </TouchableHighlight>
+          <TouchableOpacity style={styles.menuitem2} onPress={() => this.changeMenu("menu2")}>
+            <Text>Page 2</Text>
+          </TouchableOpacity>
+          <TouchableHighlight style={styles.menuitem3} onPress={() => this.changeMenu("menu3")}>
+            <Text>Page 3</Text>
+          </TouchableHighlight>
         </View>
       </View>
     );
@@ -78,7 +93,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
-    marginTop: 35,
+    marginTop: 0,
     marginBottom: 0,
   },
   menu: {
@@ -114,14 +129,24 @@ const styles = StyleSheet.create({
   },
   headerView: {
     width: '100%',
-    height: 50,
+    height: 85,
     justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: 'gray',
-    paddingBottom: 10,
+    paddingBottom: 20,
   },
   headerText: {
     color: 'white',
     fontWeight: 'bold',
   },
+
+  viewPager: {
+    flex: 1,
+    backgroundColor: 'orange',
+  },
+  pageStyle: {
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: 'red',
+  }
 });
