@@ -119,7 +119,7 @@ class TableTodos extends Component {
           </tbody>
         </table>
 
-        <textarea style={{width:700, height:200}} value={JSON.stringify(this.state.todoList)} />
+        <textarea className="mt-6" style={{width:700, height:200}} value={JSON.stringify(this.state.todoList)} />
       </div>
     );
   }
