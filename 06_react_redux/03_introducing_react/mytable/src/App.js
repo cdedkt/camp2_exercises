@@ -21,26 +21,26 @@ class CellCex extends Component {
   checkFormat(value) {
     //const re = /(\b[a-z](?!\s))/g;
     //return value.replace(re, function(x){return x.toUpperCase();});
+    //const re = /^(?:0|(?:-?[1-9][0-9]*(?:\.[0-9]{1,2})?))$/;
+
     return value;
   }
 
   handleChange(event) {
-    console.log("handleChange: event.target.id=",event.target.id);
+    //console.log("handleChange: event.target.id=",event.target.id);
     this.setState({value: this.checkFormat(event.target.value)});
   }
 
   handleFocus(event) {
-    console.log("handleFocus: event.target.id=",event.target.id);
+    //console.log("handleFocus: event.target.id=",event.target.id);
     this.setState({valueOnFocus: this.state.value});
   }
 
   handleBlur(event) {
-    console.log("handleBlur: event.target.id=",event.target.id);
+    //console.log("handleBlur: event.target.id=",event.target.id);
     if (this.state.valueOnFocus !== this.state.value) {
-      console.log("handleBlur: value is modified");
+      //console.log("handleBlur: value is modified");
       this.props.changeCexValue(event.target.id, this.state.value);
-    } else {
-      console.log("handleBlur: value is NOT modified");
     }
   }
 
@@ -94,8 +94,7 @@ class App extends Component {
   }
 
   changeCexValue(key, value) {
-    const newCexList = Cex.modifyCexValue(this.state.cexList, key, value);
-
+    const newCexList = Cex.modifyCexValue(this.state.cexList, key, value, this.props.formulaList);
     this.setState({
       cexList: [...newCexList],
     });
@@ -108,8 +107,8 @@ class App extends Component {
           <thead>
             <tr>
               <th scope="col">#</th>
-              {this.state.cexList.map(cex =>
-                <th scope="col"><div>{cex.entity}</div><div>{cex.period}</div></th>)
+              {this.state.cexList.map((cex, index) =>
+                <th key={index} scope="col"><div>{cex.entity}</div><div>{cex.period}</div></th>)
               }
             </tr>
           </thead>
