@@ -1,3 +1,7 @@
-.cell-fix {
+.cell-cex {
   background-color: yellow;
+}
+
+.cell-cex-modified {
+  background-color: red;
 }
