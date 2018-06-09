@@ -25,7 +25,6 @@ function generateKey(entity, period, indicator) {
 function modifyCexValue(cexList, keyCexToModify, value, formulaList) {
   const [entity, period, indicator] = keyCexToModify.split("/");
   //console.log("changeCexValue: entity=", entity, ", period=", period, ", indicator=", indicator, ", value=", value);
-
   const newCexList = cexList.map(cex => {
     if (cex.entity === entity && cex.period === period) {
       cex[indicator] = parseFloat(value);
@@ -76,7 +75,7 @@ function generateOrderedFormulaList(_indicatorList) {
       } else {
         indicatorList.push(currentIndicator);
       }
-    } 
+    }
   }
   if (nbIteration >= 100) {
     console.log("BOUCLE BOUCLE BOUCLE");
