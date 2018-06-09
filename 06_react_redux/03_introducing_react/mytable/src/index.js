@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import AppV1 from './AppV1';
+import App from './AppV2';
 import registerServiceWorker from './registerServiceWorker';
 
 import Cex from './Cex';
