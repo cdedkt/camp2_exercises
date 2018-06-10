@@ -1,5 +1,5 @@
 
-function getCex(entity, period, turnover, marginRate, feesPersonnal, feesMaterial) {
+function initializeCex(indicatorList, entity, period, turnover, marginRate, feesPersonnal, feesMaterial) {
   const cex = {
     entity: entity,
     period: period,
@@ -8,11 +8,16 @@ function getCex(entity, period, turnover, marginRate, feesPersonnal, feesMateria
     feesPersonnal: feesPersonnal,
     feesMaterial: feesMaterial,
   }
+  indicatorList.forEach(indicator => {
+    if (!indicator.formula && !cex[indicator.name]) {
+      cex[indicator.name] = indicator.default ? indicator.default : 0;
+    }
+  });
   return cex;
 };
 
-function calculateCex(cex, formulaList) {
-  formulaList.forEach(currentformula => {
+function calculateCex(cex, orderedFormulaList) {
+  orderedFormulaList.forEach(currentformula => {
     cex[currentformula.name] = eval(currentformula.formula);
   });
   return cex;
@@ -22,13 +27,15 @@ function generateKey(entity, period, indicator) {
   return entity + "/" + period + "/" + indicator;
 }
 
-function modifyCexValue(cexList, keyCexToModify, value, formulaList) {
+function modifyCexValue(cexList, keyCexToModify, value, orderedFormulaList) {
   const [entity, period, indicator] = keyCexToModify.split("/");
-  //console.log("changeCexValue: entity=", entity, ", period=", period, ", indicator=", indicator, ", value=", value);
+  console.log("changeCexValue: entity=", entity, ", period=", period, ", indicator=", indicator, ", value=", value);
   const newCexList = cexList.map(cex => {
     if (cex.entity === entity && cex.period === period) {
+      console.log("Cex before=", cex);
       cex[indicator] = parseFloat(value);
-      return calculateCex(cex, formulaList);
+      console.log("Cex after=", cex);
+      return calculateCex(cex, orderedFormulaList);
     } else {
       return cex;
     }
@@ -65,7 +72,15 @@ function generateOrderedFormulaList(_indicatorList) {
       //console.log("generateOrderedFormulaList: dependancedescription=", currentIndicator.name, dependancedescription);
       let hasDependance = false;
       dependancedescription.subIndicatorList.forEach(subIndicator => {
-        if (indicatorList.findIndex(indicator => indicator.name === subIndicator) > 0) {
+        if (indicatorList.findIndex(indicator =>
+          { if (indicator.name === subIndicator) {
+              //console.log("subIndicator=", subIndicator, "HAS dependance with indicator.name=", indicator.name);
+              return true;
+            } else {
+              //console.log("subIndicator=", subIndicator, "has no dependance with indicator.name=", indicator.name);
+              return false;
+            }
+          })  >= 0) {
           //console.log("hasDependance: ", currentIndicator.name, dependancedescription.formulaWithCex);
           hasDependance = true;
         }
@@ -78,15 +93,16 @@ function generateOrderedFormulaList(_indicatorList) {
     }
   }
   if (nbIteration >= 100) {
-    console.log("BOUCLE BOUCLE BOUCLE");
+    console.log("ERROR : BOUCLE BOUCLE BOUCLE");
     return;
   } else {
+    //console.log("orderedFormulaList=", orderedFormulaList);
     return orderedFormulaList;
   }
 }
 
 module.exports = {
-  getCex: getCex,
+  initializeCex: initializeCex,
   calculateCex: calculateCex,
   generateKey: generateKey,
   modifyCexValue: modifyCexValue,
