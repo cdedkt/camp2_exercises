@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Image, SafeAreaView, Dimensions } from 'react-native';
 
+import { Icon } from 'react-native-elements';
 
 const {height, width} = Dimensions.get('window');
 
